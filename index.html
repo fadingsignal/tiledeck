@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TileDeck - Flipbook Texture Viewer</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<aside id="side">
+  <img id="logo" src="tiledeck_logo_ui.png" alt="TileDeck">
+  <section>
+    <div class="row">
+      <label class="file">Open<input id="file" type="file" accept="image/*,.dds,.tga,.tif,.tiff"></label>
+      <span id="name"></span>
+    </div>
+  </section>
+
+  <section>
+    <h6>Playback</h6>
+    <div class="seg">
+      <button id="bStart" title="Go to start (Home)">|◀◀</button>
+      <button id="bBack" title="Step back (←)">|◀</button>
+      <button id="bPlay" title="Play / pause (Space)">▶</button>
+      <button id="bStop" title="Stop (S)">■</button>
+      <button id="bFwd" title="Step forward (→)">▶|</button>
+      <button id="bEnd" title="Go to end (End)">▶▶|</button>
+    </div>
+    <div class="row">
+      <span class="lbl">Speed</span>
+      <input id="speed" type="number" step="1" value="30" title="Cells per second. Negative plays in reverse.">
+      <span id="unit" class="lbl x">fps</span>
+      <span id="frame"></span>
+    </div>
+  </section>
+
+  <section>
+    <h6>Sheet</h6>
+    <div class="row"><span class="lbl">Grid</span>
+      <input id="gh" type="number" step="0.5" min="0.01" value="8" title="Horizontal cells">
+      <span class="lbl x">×</span>
+      <input id="gv" type="number" step="0.5" min="0.01" value="8" title="Vertical cells">
+    </div>
+    <div class="row"><span class="lbl">Start</span>
+      <input id="start" type="number" step="1" min="1" value="1" title="First cell of the playback range (1 = first cell)">
+      <span class="lbl x">Frames</span>
+      <input id="frames" type="number" step="1" min="0" value="0" title="Number of cells to play (0 = all remaining)">
+    </div>
+  </section>
+
+  <section>
+    <h6>Sequence</h6>
+    <div class="seg"><button id="mStep" class="on">Stepped</button><button id="mScroll">Scroll</button></div>
+    <div class="row">
+      <div class="seg"><button id="oRows" class="on" title="Run along rows first">Rows</button><button id="oCols" title="Run along columns first">Cols</button></div>
+      <div class="seg"><button id="dH" title="Horizontal direction">L→R</button><button id="dV" title="Vertical direction">T→B</button></div>
+    </div>
+    <div class="row">
+      <div class="seg"><button id="bLoop" class="on">Loop</button><button id="bPing">Ping-pong</button></div>
+      <button id="bBlend" title="Cross-fade between frames (Stepped mode)">Blend</button>
+    </div>
+  </section>
+
+  <section>
+    <h6>Look</h6>
+    <div class="row grow">
+      <button id="bTint" title="Multiply RGB by the tint color (alpha unchanged)">Tint</button>
+      <input id="tint" type="color" value="#ff8a2a" title="Tint color">
+      <button id="bChan" title="Channel view: RGBA / RGB / A / R / G / B">RGBA</button>
+      <button id="bAdd" title="Additive blending preview">Additive</button>
+    </div>
+  </section>
+
+  <section>
+    <h6>Display</h6>
+    <div class="seg"><button id="zFit" class="on" title="Scale to fit the viewport">Fit</button><button id="z1" title="Actual size: one texel per screen pixel">1:1</button></div>
+    <div class="row grow">
+      <button id="bChk" title="Checkerboard background">Checker</button>
+      <button id="bTile" title="Tile the current frame to check seams">1×1</button>
+    </div>
+    <div class="row grow">
+      <button id="bSheet" title="Show the whole sheet with the current cell outlined">Sheet</button>
+      <button id="bSmooth" class="on" title="Bilinear filtering">Smooth</button>
+    </div>
+  </section>
+
+</aside>
+<svg width="0" height="0" style="position:absolute">
+  <filter id="tintF" color-interpolation-filters="sRGB">
+    <feColorMatrix id="tintM" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+  </filter>
+</svg>
+<main id="wrap"><div id="stage"><canvas id="cv"></canvas><div id="hint">Open or drop a flipbook texture</div></div></main>
+
+<script src="lib/pako_inflate.min.js"></script>
+<script src="lib/utif.js"></script>
+<script src="decoders.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
