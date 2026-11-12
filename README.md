@@ -9,7 +9,11 @@ Everything runs locally in your browser. Textures are never uploaded anywhere.
 
 ## Usage
 
-Open `index.html` in Chrome or Edge, then click **Open** or drag a texture onto the window. Nothing needs to be installed or built.
+**Use it online:** https://fadingsignal.github.io/tiledeck/
+
+Or download the repo and open `index.html` in Chrome or Edge. Nothing needs to be installed or built.
+
+Click **Open** or drag a texture onto the window.
 
 If the filename contains the grid size, such as `Fire_8x8.png` or `Smoke_16x16.dds`, the grid is set automatically.
 
